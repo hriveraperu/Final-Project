@@ -12,6 +12,8 @@ export default defineConfig({
         register: resolve(__dirname, "src/register.html"),
         forgotten: resolve(__dirname, "src/forgot.html"),
         user: resolve(__dirname, "src/user/index.html"),
+        header: resolve(__dirname, "src/partials/header.html"),
+        footer: resolve(__dirname, "src/partials/footer.html"),
       },
     },
   },
