@@ -4,33 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lawyer Time App</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="../js/login.js" type="module"></script>
-    <script src="../js/main.js" type="module"></script>
 </head>
 <body>
-    <header id="main-header"></header>
+    <header></header>
 
     <main>
-        <form action="https://reg-and-login-form.onrender.com/" method="POST">
-            <label for="email">Email Address
-                <input type="email" name="email" id="email">
-            </label>
-            <label for="username">Username
-                <input type="text" name="username" id="username">
-            </label>
-            <label for="password">Password
+        <form>
+            <label for="userName">Username</label>
+            <input type="text" name="userName" id="userName">
+            <label for="password">Password</label>
             <input type="password" name="password" id="password">
-            </label>
-            <label for="passwordConf">Confirm Password
-                <input type="passwordConf" name="passwordConf" id="passwordConf">
-                </label>
-            <input type="button" value="Register" name="register" class="register">
-            <a href="/index.html">Already registered?</a>
+            <input type="button" value="Login" name="login">
+            <input type="button" value="Register" name="register">
         </form>
     </main>
 
-    <footer id="main-footer"></footer>
+    <footer></footer>
 
 </body>
 </html>
