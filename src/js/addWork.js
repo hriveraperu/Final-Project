@@ -1,3 +1,5 @@
+import { openModal } from "./time.js";
+
 function saveJobInfo(day) {
     const jobName = document.getElementById('jobName').value;
     const customer = document.getElementById('customer').value;
@@ -36,24 +38,22 @@ function saveJobInfo(day) {
     loadSavedJobs();
 }
 
-window.postMessage('closeModal', window.location.origin);
-
-
 function updateDateBox(day, jobInfo) {
     const dateBox = document.querySelector(`.${day} .date-box:last-child`);
-    
+
     if (jobInfo) {
-      dateBox.innerHTML = `
-        <p>${jobInfo.jobName}</p>
-        <p>${jobInfo.customer}</p>
-        <p>${jobInfo.country}</p>
-        <p>${jobInfo.hours} hours ${jobInfo.minutes} minutes</p>
-        <button class="delete-job-btn" data-day="${day}" data-job="${jobInfo.jobName}">Delete</button>
-      `;
+        dateBox.innerHTML = `
+            <p>${jobInfo.jobName}</p>
+            <p>${jobInfo.customer}</p>
+            <p>${jobInfo.country}</p>
+            <p>${jobInfo.hours} hours ${jobInfo.minutes} minutes</p>
+            <button class="delete-job-btn" data-day="${day}" data-job="${jobInfo.jobName}">Delete</button>
+        `;
     } else {
-      dateBox.innerHTML = ''; // Clear the date box content if there's no job information
+        dateBox.innerHTML = ''; // Clear the date box content if there's no job information
     }
-  }
+}
+
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('delete-job-btn')) {
         const day = event.target.getAttribute('data-day');
@@ -82,20 +82,21 @@ saveBtn.addEventListener('click', function (event) {
 // Load saved job information from local storage and populate the date boxes
 function loadSavedJobs() {
     let savedJobs = JSON.parse(localStorage.getItem('savedJobs')) || [];
-  
+
     // Loop through each day element and find the corresponding job information (if any)
     document.querySelectorAll('.monday, .tuesday, .wednesday, .thursday, .friday').forEach(dayElement => {
-      const day = dayElement.classList[0];
-      const jobInfo = savedJobs.find(job => job.day === day);
-      updateDateBox(day, jobInfo);
+        const day = dayElement.classList[0];
+        const jobInfo = savedJobs.find(job => job.day === day);
+        updateDateBox(day, jobInfo);
     });
-  }
+}
 
 // Load saved jobs when the page loads
 loadSavedJobs();
 
 document.querySelectorAll('.monday, .tuesday, .wednesday, .thursday, .friday').forEach(dayElement => {
-    dayElement.addEventListener('click', () => {
-        openModal(dayElement.classList[0]);
-    });
+  dayElement.addEventListener('click', () => {
+      const day = dayElement.classList[0];
+      openModal(day); // Pass the day value here
+  });
 });

@@ -1,5 +1,3 @@
-import { fetchCountryInfo, fetchSelectedCountryInfo } from "./countryLoader.js";
-
 var curr = new Date();
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -41,8 +39,12 @@ function openModal(day) {
   const modalOverlay = document.querySelector('.modal-overlay');
   modalOverlay.style.display = 'block';
 
+  // Set the selected day in the modal form
+  const dayInput = document.querySelector('.modal-form .day-input');
+  dayInput.value = day;
+
   // Fetch and display country information for the selected day's country
-  fetchSelectedCountryInfo(day);
+  fetchCountryInfo();
 }
 
 // Function to close the modal
@@ -62,14 +64,12 @@ closeModalBtn.addEventListener('click', closeModal);
 
 // Add event listeners to "Monday" to "Friday" elements to show the modal
 document.querySelectorAll('.monday, .tuesday, .wednesday, .thursday, .friday').forEach(dayElement => {
-    dayElement.addEventListener('click', () => {
-        openModal(dayElement.classList[0]);
-    });
+  dayElement.addEventListener('click', () => {
+      openModal(dayElement.classList[0]);
+  });
 });
 
 function showPreviousWeek() {
-
-
   curr.setDate(curr.getDate() - 7);
   firstLastDay();
   updateWeekHeaders();
@@ -92,27 +92,79 @@ function showToday() {
     firstLastDay();
     updateWeekHeaders();
     updateActualWeek();
-    fetchSelectedCountryInfo(); // Update country info for the selected day
+    fetchCountryInfo(); // Update country info for the selected day
 }
 
 // Fetch country information and populate the dropdown when the page loads
-fetchCountryInfo();
+async function fetchCountryInfo() {
+    try {
+        const response = await fetch('https://restcountries.com/v3.1/all');
+        const data = await response.json();
 
-// Call the functions to update the week headers and actual week when the page loads
-firstLastDay();
-updateWeekHeaders();
-updateActualWeek();
+        // Sort the countries alphabetically by their common name
+        data.sort((a, b) => a.name.common.localeCompare(b.name.common));
 
+        // Populate the dropdown select with country names
+        const countrySelect = document.getElementById('countrySelect');
+        countrySelect.innerHTML = ''; // Clear previous options
+        data.forEach(country => {
+            const { name } = country;
+            const option = document.createElement('option');
+            option.value = name.common;
+            option.textContent = name.common;
+            countrySelect.appendChild(option);
+        });
+
+        // Update country information for the selected day's country (if applicable)
+        updateCountryInfo();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+// Function to fetch and display country information for the selected day's country
+async function updateCountryInfo() {
+    const dayInput = document.querySelector('.modal-form .day-input');
+    const day = dayInput.value;
+    const countrySelect = document.getElementById('countrySelect');
+    const selectedCountry = countrySelect.value;
+
+    if (day && selectedCountry) {
+        try {
+            const response = await fetch('https://restcountries.com/v3.1/all');
+            const data = await response.json();
+            const country = data.find(country => country.name.common === selectedCountry);
+
+            if (country) {
+                const { name, timezones, flags, region, capital, currencies } = country;
+                const currencyCode = currencies ? Object.keys(currencies)[0] : 'N/A';
+                const currencyName = currencies ? currencies[currencyCode].name : 'N/A';
+
+                const countryInfoDiv = document.getElementById('countryInfo');
+                countryInfoDiv.innerHTML = `
+                    <img class="flag" src="${flags.png}" alt="${name.common} flag">
+                    <h2 class="country">${name.common}</h2>
+                    <p>Timezone: ${timezones.join(', ')}</p>
+                    <p>Region: ${region}</p>
+                    <p>Capital: ${capital}</p>
+                    <p>Currency: ${currencyName} (${currencyCode})</p>
+                    <hr>
+                `;
+            } else {
+                console.error('Selected country not found.');
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+}
 
 // Event listener for the "countrySelect" dropdown in the modal
 const countrySelectModal = document.getElementById('countrySelect');
-countrySelectModal.addEventListener('change', function () {
-    const day = document.querySelector('.modal-form .day-input').value;
-    fetchSelectedCountryInfo(day);
-});
+countrySelectModal.addEventListener('change', updateCountryInfo);
 
-window.addEventListener('message', event => {
-  if (event.data === 'closeModal') {
-      closeModal();
-  }
-});
+// Initialize the app
+firstLastDay();
+updateWeekHeaders();
+updateActualWeek();
+fetchCountryInfo();
