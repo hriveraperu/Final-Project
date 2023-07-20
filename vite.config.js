@@ -14,6 +14,7 @@ export default defineConfig({
         user: resolve(__dirname, "src/user/index.html"),
         header: resolve(__dirname, "src/partials/header.html"),
         footer: resolve(__dirname, "src/partials/footer.html"),
+        time: resolve(__dirname, "src/time/index.html")
       },
     },
   },

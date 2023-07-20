@@ -1,25 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Inika&display=swap');
+
 :root {
     --background-body: #FF8541;
     --modules-color: #431A1A;
+    --font-general: "Inika";
+}
+
+html {
+
+    background-color: var(--background-body);
+    font-family: var(--font-general);
+    color: white;
 }
 
 form {
-    background-color: var(--background-body);
+    background-color: var(--modules-color);
     margin: 0 auto;
     width: 30%;
     place-content: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    border-radius: 1rem;
 }
 
 form input {
     margin: 1rem;
+    padding: 1rem;
+    width: 60%;
+    place-self: center;
+    height: 2rem;
+    font-size: large;
+    font-family: var(--font-general);
+    border-radius: 1rem;
 }
 
 form label {
     display: grid;
+    color: white;
+    text-align: center;
+    padding: 1rem;
 }
 
-form button {
-    place-content: center;
+label p {
+    margin: 0 auto;
+    padding: 0;
+    font-size: x-large;
+}
+
+
+header {
+    height: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    color: white;
+}
+
+header div {
+    width: 100%;
+    grid-column: 3/4;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+header img {
+    height: 50%;
+    margin: 0 auto;
+}
+
+header div a, header div p {
+    margin: 0 auto;
+    padding: 0;
+    color: white;
+}
+
+header h1 {
+    grid-column: 2/3;
+    color: white;
+    font-weight: 200;
+    font-size: xx-large;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+}
+
+.buttons button {
+    width: 40%;
+    height: 3.5rem;
+    font-size: large;
+    border-radius: 1rem;
+    font-family: var(--font-general);
+    background-color: #FF8541;
+    color: white;
+}
+
+.buttons a {
+    font-size: large;
+    color: white;
+}
+
+.buttons a:hover {
+    color: var(--background-body);
+}
+
+footer {
+    color: white;
+}
+
+.week-box {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-row: auto;
+    height: 40vw;
+    display: grid;
+    grid-gap: 2rem;
+    text-align: center;
+    overflow: scroll;
+    
+}
+
+main div div {
+    background-color: var(--modules-color);
+    height: 90%;
+    border-radius: 1rem;
+}
+
+.monday:hover, .tuesday:hover, .wednesday:hover, .thursday:hover, .friday:hover {
+    background-color: #812f2f;
+}
+
+#workBox { 
+    display:none; 
+    position: fixed;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.modal {
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 50%;
+    background-color: var(--modules-color);
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-form {
+    width: 80%;
+    text-align: center;
+}
+
+.flag {
+    width: 10%;
+    display: inline;
+}
+
+.country {
+    display: inline;
+}
+
+#countryInfo p {
+    margin: 0 auto;
+}
+
+.modal-form input {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 60%;
+    place-self: center;
+    height: 2rem;
+    font-size: large;
+    font-family: var(--font-general);
+    border-radius: 1rem;
 }

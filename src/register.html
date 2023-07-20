@@ -4,22 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lawyer Time App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="/js/login.js" type="module"></script>
+    <script src="/js/main.js" type="module"></script>
 </head>
 <body>
-    <header></header>
+    <header class="divider" id="main-header"></header>
 
-    <main>
+    <main id="main-header">
         <form>
-            <label for="userName">Username</label>
-            <input type="text" name="userName" id="userName">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password">
-            <input type="button" value="Login" name="login">
-            <input type="button" value="Register" name="register">
+                <div class="register-box">
+                    <label><p>Username</p>
+                        <input type="text" name="username" id="username"/>
+                    </label>
+                    <label><p>Email</p>
+                        <input type="text" name="email" id="email"/>
+                    </label>
+                    <label><p>Password</p>
+                        <input type="password" name="password" id="password"/>
+                    </label>
+                    <label><p>Confirm Password</p>
+                        <input type="password" name="passwordConf" id="passwordConf"/>
+                    </label>
+                    <div class="buttons">
+                        <button class="login" value="Register" name="register">Register</button>
+                        <a href="/index.html">Already registered?</a></button>
+                    </div>
+                </div>
         </form>
     </main>
 
-    <footer></footer>
+    <footer id="main-footer"></footer>
 
 </body>
 </html>

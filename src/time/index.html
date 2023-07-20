@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyer Time App</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- <script src="/js/user.js" type="module"></script> -->
+    <script src="/js/main.js" type="module"></script>
+    <script src="/js/time.js" type="module"></script>
+    <script src="/js/addWork.js" type="module"></script>
+</head>
+<body>
+    <header class="divider" id="main-header"></header>
+
+    <main>
+        <button class="previous-week-btn">Previous Week</button>
+        <span class="actual-week"></span>
+        <button class="today-btn">Today</button>
+        
+        <div class="week-box">
+            <div>
+                <p>Monday <span class="monday-day"></span></p>
+                <div class="monday">
+                    <select class="countrySelect" id="mondaySelect"></select>
+                    <div class="date-box"></div>
+                </div>
+            </div>
+            <div>
+                <p>Tuesday <span class="tuesday-day"></span></p>
+                <div class="tuesday">
+                    <select class="countrySelect" id="tuesdaySelect"></select>
+                    <div class="date-box"></div>
+                </div>
+            </div>
+            <div>
+                <p>Wednesday <span class="wednesday-day"></span></p>
+                <div class="wednesday">
+                    <select class="countrySelect" id="wednesdaySelect"></select>
+                    <div class="date-box"></div>
+                </div>
+            </div>
+            <div>
+                <p>Thursday <span class="thursday-day"></span></p>
+                <div class="thursday">
+                    <select class="countrySelect" id="thursdaySelect"></select>
+                    <div class="date-box"></div>
+                </div>
+            </div>
+            <div>
+                <p>Friday <span class="friday-day"></span></p>
+                <div class="friday">
+                    <select class="countrySelect" id="fridaySelect"></select>
+                    <div class="date-box"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+        <div class="modal-overlay">
+            <div class="modal">
+                <span class="close-modal-btn">&times;</span>
+                <h2>Add Job Information</h2>
+                <form class="modal-form">
+                    <label for="jobName">Job Name:</label>
+                    <input type="text" id="jobName" required>
+                    <label for="customer">Customer:</label>
+                    <input type="text" id="customer" required>
+                    <label for="country">Country:</label>
+                    <select id="countrySelect">
+                        
+                    </select>
+                    <div id="countryInfo"></div>
+                    <label for="hours">Time (Hours):</label>
+                    <div class="time-input">
+                        <input type="number" id="hours" min="0" max="23" value="0" required>
+                    </div>
+                    <label for="minutes">Time (Minutes):</label>
+                    <div class="time-input">
+                        <input type="number" id="minutes" min="0" max="59" value="0" required>
+                    </div>
+                    <input type="hidden" class="day-input">
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+ 
+    </main>
+
+    <footer id="main-footer"></footer>
+
+</body>
+</html>

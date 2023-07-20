@@ -37,15 +37,19 @@ export async function loginRequest(user) {
   
   console.log(baseURL);
   try {
-    const response = await fetch(baseURL + "login");
-    if (!response.ok) {
-      throw new Error("Network response was not OK");
-    }
-
-    console.log(response);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    };
+    const response = await fetch(baseURL + "login", options);
     
+    const result = await response.json();
+    console.table(result);
 
-  return response.json();
+  return result;
   } catch(err) {
     console.log(err);
   }

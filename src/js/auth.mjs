@@ -4,15 +4,16 @@ import jwt_decode from "jwt-decode";
 
 const tokenKey = "so-token";
 
-export async function login(creds, redirect = "/"){
+export async function login(creds){
     console.log("login function")
     try {
         console.log(creds);
         const token = await loginRequest(creds);
-        setLocalStorage(tokenKey, token.sessionId);
+        console.log(token);
+        setLocalStorage(tokenKey, token);
         console.log("token set")
 
-        window.location = redirect;
+        window.location = "/time/index.html";
     } catch (err) {
         //alertMessage(err.message.message);
         console.log(err.message);
@@ -20,7 +21,7 @@ export async function login(creds, redirect = "/"){
 }
 
 export function checkLogin(){
-    const token = getLocalStorage(tokenKey);
+    const token = getLocalStorage(tokenKey.SessionId);
     const valid = isTokenValid(token);
 
     if (!valid) {
